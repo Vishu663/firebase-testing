@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import "./sign-in.css";
 import { useNavigate } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { FcGoogle } from "react-icons/fc";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -57,7 +59,7 @@ export default function SignIn() {
         if (user) {
           alert("Login Successful");
           console.log("login works");
-          navigate("/");
+          navigate("/home");
         } else {
           setErrorMessage("Invalid email or password");
         }
@@ -81,6 +83,10 @@ export default function SignIn() {
       console.error("Error during Google sign-in:", error);
       setErrorMessage("Error signing in with Google");
     }
+  };
+
+  const handleReg = () => {
+    navigate("/signup");
   };
 
   return (
@@ -108,7 +114,15 @@ export default function SignIn() {
 
       <div>
         <p>Or sign in with:</p>
-        <button onClick={handleGoogleSignIn}>Google</button>
+        <button className="google" onClick={handleGoogleSignIn}>
+          Google
+          <FcGoogle />
+        </button>
+      </div>
+
+      <div>
+        <p>Not a member, sign up:</p>
+        <button onClick={handleReg}>Register</button>
       </div>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}

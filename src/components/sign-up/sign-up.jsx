@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { FcGoogle } from "react-icons/fc";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -55,7 +56,7 @@ export default function SignUp() {
 
       if (response.ok) {
         alert("Registration Successful");
-        navigate("/"); // Redirect to home or another page
+        navigate("/signin"); // Redirect to home or another page
       } else {
         setErrorMessage("Registration failed");
       }
@@ -97,6 +98,10 @@ export default function SignUp() {
     }
   };
 
+  const handleMember = () => {
+    navigate("/signin");
+  };
+
   return (
     <div className="signup-container">
       <h2>Sign Up</h2>
@@ -122,7 +127,15 @@ export default function SignUp() {
 
       <div>
         <p>Or sign up with:</p>
-        <button onClick={handleGoogleSignUp}>Google</button>
+        <button className="google" onClick={handleGoogleSignUp}>
+          Google
+          <FcGoogle />
+        </button>
+      </div>
+
+      <div>
+        <p>Already a member?</p>
+        <button onClick={handleMember}>Sign In</button>
       </div>
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
