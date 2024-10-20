@@ -78,7 +78,7 @@ export default function SignIn() {
       const user = result.user;
       alert(`Welcome, ${user.displayName}`);
       console.log("Google Sign-In successful:", user);
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       console.error("Error during Google sign-in:", error);
       setErrorMessage("Error signing in with Google");
